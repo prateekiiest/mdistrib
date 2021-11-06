@@ -4,7 +4,7 @@ import math
 from mdistrib.edgehash import Edgehash
 from dask import delayed
 
-def compute_score(i,gf, anom_score, cur_count, tot_count):
+def compute_score_partitions(i,gf, anom_score, cur_count, tot_count):
     anom_score = 0
 
     for row in gf.itertuples():
@@ -28,13 +28,17 @@ def mdistrib(df, num_rows, num_buckets, num_partitions):
     anom_score = []
     ro = 0
     m = df.src.max()
+    totalIterations = list(set(df["timestamp"]))[-1:][0]
+    df = df.set_index('timestamp')
 
-    while(ro < 1463):
+    df = df.repartition(npartitions=totalIterations)
+
+    while(ro < totalIterations):
         cur_count = [Edgehash(num_rows, num_buckets, m)]*num_partitions
         total_count = Edgehash(num_rows, num_buckets, m)
         for part in range(num_partitions):
             gf = df.get_partition(part+ro)
-            a = (delayed)(compute_score)(part+ro, gf, anom_score, cur_count[part], total_count)
+            a = (delayed)(compute_score_partitions)(part+ro, gf, anom_score, cur_count[part], total_count)
             output.append(a)
             
         ro += num_partitions
