@@ -1,7 +1,17 @@
-# mdistrib
+# Distributed Microcluster Detection in Large Data streams
 
-Entire code
+We present here the code for Distributed MicroCluster Detection in Large Data Streams
 
-https://colab.research.google.com/drive/1NeSwCL84RTNFiMTjRWHzHQaYuwYeAIMQ?usp=sharing
+- data
+    - Contains related data for our experiments (including DARPA dataset)
+- models
+    - Both Distributed Method for Count Min Sketch (CMS) and Frequent Item Sketch (FIS) data sketches.
+- visualisations
+    - Experimental plots and sample examples
+    
 
-To be reformatted in the codebase in some time.
+The entire code is written in python and we use dask library for our distributed operations.
+
+
+Experimental code https://colab.research.google.com/drive/1NeSwCL84RTNFiMTjRWHzHQaYuwYeAIMQ?usp=sharing
+
