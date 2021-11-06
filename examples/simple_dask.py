@@ -1,3 +1,4 @@
+import dask
 from dask import delayed
 # Functions to perform mathematics operations
 def square(x):
