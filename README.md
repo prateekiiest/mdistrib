@@ -3,7 +3,6 @@ Frequency based Sketch Datastructures
 -------
 
 
-### Authors : Prateek Chanda, Malay Bhattacharyya
 
 
 
